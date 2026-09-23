@@ -1,0 +1,78 @@
+{
+  "name": "adinkra-icons-react",
+  "version": "0.1.0",
+  "description": "Adinkra SVG icons as typed React components",
+  "type": "module",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adinkra-UI-Icons/adinkra-icons-react.git"
+  },
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./icons/*": {
+      "import": {
+        "types": "./dist/icons/*.d.ts",
+        "default": "./dist/icons/*.js"
+      },
+      "require": {
+        "types": "./dist/icons/*.d.cts",
+        "default": "./dist/icons/*.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "typesVersions": {
+    "*": {
+      "icons/*": [
+        "./dist/icons/*.d.ts"
+      ]
+    }
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=22"
+    }
+  },
+  "scripts": {
+    "generate": "node scripts/generate.mjs",
+    "build": "npm run generate && tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs",
+    "check": "npm run build && npm run typecheck && npm test && npm run check:package",
+    "prepack": "npm run build",
+    "prepublishOnly": "npm run check && node scripts/check-release.mjs",
+    "check:package": "node scripts/check-package.mjs"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "esbuild": "^0.27.7",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}
